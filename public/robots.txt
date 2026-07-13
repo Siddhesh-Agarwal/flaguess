@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://flaguess.siddhesh.cc/sitemap.xml
