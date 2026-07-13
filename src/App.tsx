@@ -94,7 +94,7 @@ export default function App() {
             Field Atlas &middot; Sheet {roundLabel}
           </p>
           <h1 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight leading-none mt-1">
-            FLAG SURVEY
+            FLAGUESS
           </h1>
         </div>
         <div className="text-right font-mono">
