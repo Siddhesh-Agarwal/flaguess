@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Atlas / field-survey palette */
+    --paper: 60 12% 91%;        /* chart-paper off-white */
+    --paper-line: 60 8% 78%;    /* faint grid lines */
+    --ink: 150 18% 14%;         /* deep survey ink */
+    --ink-soft: 150 10% 32%;
+    --blueprint: 205 45% 24%;   /* blueprint blue */
+    --brick: 8 52% 40%;         /* stamp / correct-answer red */
+    --brick-soft: 8 52% 94%;
+    --brass: 38 42% 42%;        /* streak / secondary accent */
+    --brass-soft: 38 45% 92%;
+
+    --background: var(--paper);
+    --foreground: var(--ink);
+    --card: 60 20% 97%;
+    --card-foreground: var(--ink);
+    --popover: 60 20% 97%;
+    --popover-foreground: var(--ink);
+    --primary: var(--blueprint);
+    --primary-foreground: 60 20% 97%;
+    --secondary: 60 10% 87%;
+    --secondary-foreground: var(--ink);
+    --muted: 60 10% 87%;
+    --muted-foreground: var(--ink-soft);
+    --accent: var(--brass-soft);
+    --accent-foreground: var(--ink);
+    --destructive: var(--brick);
+    --destructive-foreground: 60 20% 97%;
+    --border: 60 8% 78%;
+    --input: 60 8% 78%;
+    --ring: var(--blueprint);
+    --radius: 0.25rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+    background-image:
+      linear-gradient(hsl(var(--paper-line) / 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--paper-line) / 0.5) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+}
+
+.font-display {
+  font-family: "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
