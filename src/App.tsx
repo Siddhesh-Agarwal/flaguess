@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { COUNTRIES, type Country } from "@/countries";
 import { FLAG_SVGS } from "@/flagSvgs";
@@ -13,8 +13,6 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
-type LogEntry = { correct: boolean };
-
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -23,6 +21,8 @@ function shuffle<T>(arr: T[]): T[] {
   }
   return a;
 }
+
+const SORTED_COUNTRIES = [...COUNTRIES].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function App() {
   const [deck, setDeck] = useState<Country[]>(() => shuffle(COUNTRIES));
@@ -33,20 +33,12 @@ export default function App() {
   const [score, setScore] = useState(0);
   const [streak, setStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
-  const [log, setLog] = useState<LogEntry[]>([]);
+  const [log, setLog] = useState<{ correct: boolean }[]>([]);
   const [seenCount, setSeenCount] = useState(0);
 
   const current = deck[index % deck.length];
 
-  const sortedCountries = useMemo(
-    () => [...COUNTRIES].sort((a, b) => a.name.localeCompare(b.name)),
-    []
-  );
-
-  const roundLabel = useMemo(
-    () => String((index % deck.length) + 1).padStart(3, "0"),
-    [index, deck.length]
-  );
+  const roundLabel = String((index % deck.length) + 1).padStart(3, "0");
 
   function choose(country: Country) {
     if (status !== "idle") return;
@@ -135,28 +127,20 @@ export default function App() {
             />
 
             {/* Stamp */}
-            {status === "correct" && (
+            {status !== "idle" && (
               <div
-                className="pointer-events-none absolute select-none font-display font-bold uppercase text-[hsl(var(--brick))] border-4 border-[hsl(var(--brick))] rounded-full px-5 py-2 text-2xl sm:text-3xl tracking-widest"
+                className={cn("pointer-events-none absolute select-none font-display font-bold uppercase border-4 rounded-full px-5 py-2 text-2xl sm:text-3xl tracking-widest",
+                  status === "correct"
+                    ? "text-[hsl(var(--brick))] border-[hsl(var(--brick))]"
+                    : "text-[hsl(var(--ink-soft))] border-[hsl(var(--ink-soft))]"
+                )}
                 style={{
                   transform: "rotate(-12deg) scale(1)",
                   animation: "stamp-thud 0.35s ease-out",
-                  opacity: 0.9,
+                  opacity: status === "correct" ? 0.9 : 0.85,
                 }}
               >
-                Verified
-              </div>
-            )}
-            {status === "wrong" && (
-              <div
-                className="pointer-events-none absolute select-none font-display font-bold uppercase text-[hsl(var(--ink-soft))] border-4 border-[hsl(var(--ink-soft))] rounded-full px-5 py-2 text-2xl sm:text-3xl tracking-widest"
-                style={{
-                  transform: "rotate(-12deg) scale(1)",
-                  animation: "stamp-thud 0.35s ease-out",
-                  opacity: 0.85,
-                }}
-              >
-                Unfiled
+                {status === "correct" ? "Verified" : "Unfiled"}
               </div>
             )}
           </div>
@@ -201,7 +185,7 @@ export default function App() {
                     <CommandList>
                       <CommandEmpty>No country found.</CommandEmpty>
                       <CommandGroup>
-                        {sortedCountries.map((country) => (
+                        {SORTED_COUNTRIES.map((country) => (
                           <CommandItem
                             key={country.code}
                             value={country.name}
