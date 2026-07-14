@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { Image } from "@unpic/react";
 import { COUNTRIES, type Country } from "@/countries";
 import {
   Command,
@@ -118,20 +117,12 @@ export default function App() {
           </div>
 
           <div className="relative flex items-center justify-center py-10 px-6">
-            <div
+            <img
               key={current.code}
-              className="relative w-64 sm:w-72 aspect-[3/2] overflow-hidden"
-              role="img"
-              aria-label="Flag to identify"
-            >
-              <Image
-                src={`https://flagcdn.com/${current.code}.svg`}
-                alt="Flag to identify"
-                layout="fullWidth"
-                className="object-cover block"
-                priority
-              />
-            </div>
+              src={`https://flagcdn.com/${current.code}.svg`}
+              alt="Flag to identify"
+              className="w-64 sm:w-72 aspect-[3/2] object-cover block"
+            />
 
             {/* Stamp */}
             {status !== "idle" && (
