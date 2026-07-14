@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
+import { Image } from "@unpic/react";
 import { COUNTRIES, type Country } from "@/countries";
-import { FLAG_SVGS } from "@/flagSvgs";
 import {
   Command,
   CommandEmpty,
@@ -120,11 +120,18 @@ export default function App() {
           <div className="relative flex items-center justify-center py-10 px-6">
             <div
               key={current.code}
-              className="relative w-64 sm:w-72 aspect-[3/2] overflow-hidden [&_svg]:w-full [&_svg]:h-full [&_svg]:object-cover [&_svg]:block"
+              className="relative w-64 sm:w-72 aspect-[3/2] overflow-hidden"
               role="img"
               aria-label="Flag to identify"
-              dangerouslySetInnerHTML={{ __html: FLAG_SVGS[current.code] ?? "" }}
-            />
+            >
+              <Image
+                src={`https://flagcdn.com/${current.code}.svg`}
+                alt="Flag to identify"
+                layout="fullWidth"
+                className="object-cover block"
+                priority
+              />
+            </div>
 
             {/* Stamp */}
             {status !== "idle" && (
