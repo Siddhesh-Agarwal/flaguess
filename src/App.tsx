@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import "@fontsource/barlow-condensed";
+import "@fontsource-variable/jetbrains-mono/wght.css";
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -166,6 +168,7 @@ export default function App() {
               <Popover open={open} onOpenChange={(o) => status === "idle" && setOpen(o)}>
                 <PopoverTrigger asChild>
                   <button
+                    type="button"
                     role="combobox"
                     aria-expanded={open}
                     disabled={status !== "idle"}
@@ -209,6 +212,7 @@ export default function App() {
                 <button
                   onClick={skip}
                   className="shrink-0 px-5 font-display font-semibold uppercase tracking-wide text-base border-2 border-[hsl(var(--ink-soft))] text-[hsl(var(--ink-soft))] hover:bg-[hsl(var(--ink-soft))] hover:text-[hsl(var(--paper))] transition-colors"
+                  type="button"
                 >
                   Skip
                 </button>
@@ -218,6 +222,7 @@ export default function App() {
                 <button
                   onClick={next}
                   className="shrink-0 px-5 font-display font-semibold uppercase tracking-wide text-base border-2 border-[hsl(var(--ink))] bg-[hsl(var(--ink))] text-[hsl(var(--paper))] hover:bg-[hsl(var(--blueprint))] hover:border-[hsl(var(--blueprint))] transition-colors"
+                  type="button"
                 >
                   Next →
                 </button>
