@@ -108,10 +108,10 @@ export default function App() {
       <main className="w-full max-w-xl">
         <div className="relative bg-[hsl(var(--card))] border-2 border-[hsl(var(--ink))] shadow-[6px_6px_0_hsl(var(--ink)/0.15)]">
           {/* corner ticks */}
-          <span className="absolute -top-[7px] -left-[7px] w-3 h-3 border-t-2 border-l-2 border-[hsl(var(--ink))]" />
-          <span className="absolute -top-[7px] -right-[7px] w-3 h-3 border-t-2 border-r-2 border-[hsl(var(--ink))]" />
-          <span className="absolute -bottom-[7px] -left-[7px] w-3 h-3 border-b-2 border-l-2 border-[hsl(var(--ink))]" />
-          <span className="absolute -bottom-[7px] -right-[7px] w-3 h-3 border-b-2 border-r-2 border-[hsl(var(--ink))]" />
+          <span className="absolute top-[-7px] left-[-7px] w-3 h-3 border-t-2 border-l-2 border-[hsl(var(--ink))]" />
+          <span className="absolute top-[-7px] right-[-7px] w-3 h-3 border-t-2 border-r-2 border-[hsl(var(--ink))]" />
+          <span className="absolute bottom-[-7px] left-[-7px] w-3 h-3 border-b-2 border-l-2 border-[hsl(var(--ink))]" />
+          <span className="absolute bottom-[-7px] right-[-7px] w-3 h-3 border-b-2 border-r-2 border-[hsl(var(--ink))]" />
 
           <div className="px-6 pt-6 flex items-center justify-between font-mono text-[11px] tracking-[0.2em] text-[hsl(var(--ink-soft))] uppercase">
             <span>Specimen {String(current.code).toUpperCase()}</span>
@@ -123,7 +123,7 @@ export default function App() {
               key={current.code}
               src={`https://flagcdn.com/${current.code}.svg`}
               alt="Flag to identify"
-              className="w-64 sm:w-72 aspect-[3/2] object-cover block"
+              className="w-64 sm:w-72 aspect-3/2 object-cover block"
             />
 
             {/* Stamp */}
@@ -172,7 +172,7 @@ export default function App() {
                     role="combobox"
                     aria-expanded={open}
                     disabled={status !== "idle"}
-                    className="flex-1 flex items-center justify-between bg-transparent border-2 border-[hsl(var(--ink))] px-4 py-3 font-mono text-base text-left focus:outline-none focus:ring-2 focus:ring-[hsl(var(--blueprint))] disabled:opacity-60"
+                    className="flex-1 flex items-center justify-between bg-transparent border-2 border-[hsl(var(--ink))] px-4 py-3 font-mono text-base text-left focus:outline-hidden focus:ring-2 focus:ring-[hsl(var(--blueprint))] disabled:opacity-60"
                   >
                     <span className={picked ? "" : "text-[hsl(var(--ink-soft)/0.7)]"}>
                       {picked ? picked.name : "Select the country…"}
@@ -180,7 +180,7 @@ export default function App() {
                     <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
                   </button>
                 </PopoverTrigger>
-                <PopoverContent className="w-[--radix-popover-trigger-width] p-0 rounded-none border-2 border-[hsl(var(--ink))]">
+                <PopoverContent className="w-(--radix-popover-trigger-width) p-0 rounded-none border-2 border-[hsl(var(--ink))]">
                   <Command>
                     <CommandInput placeholder="Search countries…" className="font-mono" />
                     <CommandList>
